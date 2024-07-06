@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { handleLogout } from '../store/slices/userSlice';
 
-const pages = ['Categorie', 'Blog', 'Cart'];
+const pages = ['Category', 'About', 'Contact'];
 const settings = ['Profile', 'Logout'];
 
 function Navbar() {
