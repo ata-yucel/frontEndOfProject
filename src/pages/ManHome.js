@@ -55,14 +55,13 @@ function ManHome() {
   </Slider>
 </div>
 
-<h1 className="text-3xl font-semibold text-gray-900 dark:text-black mb-4 text-center">All Man Products</h1>
+<h1 className="text-5xl font-bold text-gray-900 dark:text-stone-400 mb-4 text-center">All Man Products</h1>
 
       <div className='grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4'>
         {data && data.map((product, key) => (
-          <div
-            key={key}
-            className="relative w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 group"
-            style={{ minHeight: "450px" }}
+          <div className="relative w-full max-w-sm border-stone-400 border-4 bg-lime-200 rounded-lg dark:bg-lime-200 dark:border-stone-400 group"
+          style={{ minHeight: "450px" }}
+          key={key}
           >
             <a href="#">
               <img
@@ -74,12 +73,12 @@ function ManHome() {
             </a>
             <div className="px-5 pb-5">
               <a href="#">
-                <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                <h5 className="text-xl font-semibold tracking-tight text-stone-400 dark:text-stone-400">
                   {product.nameOfProduct}
                 </h5>
               </a>
               <div className="flex items-center justify-between">
-                <span className="text-3xl font-bold text-gray-900 dark:text-white group-hover:hidden">
+                <span className="text-3xl font-bold text-stone-400 dark:text-stone-400 group-hover:hidden">
                   {product.price} TL
                 </span>
                 <button
