@@ -9,6 +9,8 @@ import Cart from "./pages/Cart"
 import LayoutWithNavbar from "./layouts/LayoutWithNavbar"
 import LayoutWithoutNavbar from "./layouts/LayoutWithoutNavbar"
 import Profile from "./pages/Profile"
+import WomanHome from "./pages/WomanHome"
+import Home from "./pages/Home"
 
 const router = createBrowserRouter([
   {
@@ -17,6 +19,10 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/manhome",
         element: <ManHome />,
       },
       {
@@ -26,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />
+      },
+      {
+        path: "/womanhome",
+        element: <WomanHome />
       },
     ]
   },

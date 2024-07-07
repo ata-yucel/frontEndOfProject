@@ -3,11 +3,10 @@ import axios from "axios";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Navbar from '../components/Navbar';
 import { useDispatch } from 'react-redux';
 import { increment } from '../store/slices/cartSlice';
 
-function ManHome() {
+function WomanHome() {
   const dispatch = useDispatch();
   const [data, setData] = useState([]);
   const [featured, setFeatured] = useState([]);
@@ -18,10 +17,10 @@ function ManHome() {
 
   const getProducts = async () => {
     try {
-      let response = await axios.get("http://localhost:3000/man/allManProducts");
+      let response = await axios.get("http://localhost:3000/woman/allWomanProducts");
       console.log(response.data);
       setData(response.data.data);
-      setFeatured(response.data.data.slice(0, 3)); // İlk üç ürünü öne çıkarılan fotoğraflar olarak ayarlayın
+      setFeatured(response.data.data.slice(0, 3));
     } catch (error) {
       console.log('Get All Products Error', error);
     }
@@ -42,26 +41,26 @@ function ManHome() {
     <>
       <div className="fixed top-0 left-0 w-full h-full bg-gradient-to-r from-[#ceca76] to-[#c8c7b6] z-[-1]"></div>
       <div className="relative w-full h-[650px] overflow-hidden" style={{ position: 'relative', top: '-15px' }}>
-  <Slider {...settings}>
-    {featured.map((item, index) => (
-      <div key={index} className="w-full h-full flex items-center justify-center">
-        <img
-          src={item.image}
-          alt={`Featured ${index}`}
-          className="w-full h-[600px] max-h-full object-cover flex items-center justify-center"
-        />
+        <Slider {...settings}>
+          {featured.map((item, index) => (
+            <div key={index} className="w-full h-full flex items-center justify-center">
+              <img
+                src={item.image}
+                alt={`Featured ${index}`}
+                className="w-full h-[600px] max-h-full object-cover flex items-center justify-center"
+              />
+            </div>
+          ))}
+        </Slider>
       </div>
-    ))}
-  </Slider>
-</div>
 
-<h1 className="text-5xl font-bold text-gray-900 dark:text-stone-400 mb-4 text-center">All Man Products</h1>
+      <h1 className="text-5xl font-bold text-gray-900 dark:text-stone-400 mb-4 text-center">All Woman Products</h1>
 
       <div className='grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4'>
         {data && data.map((product, key) => (
           <div className="relative w-full max-w-sm border-stone-400 border-4 bg-lime-200 rounded-lg dark:bg-stone-200 dark:border-stone-400 group"
-          style={{ minHeight: "450px" }}
-          key={key}
+            style={{ minHeight: "450px" }}
+            key={key}
           >
             <a href="#">
               <img
@@ -83,7 +82,7 @@ function ManHome() {
                     <span className="text-2xl font-bold text-stone-400 dark:text-stone-400 line-through mr-2 group-hover:hidden">
                       {product.price} TL
                     </span>
-                    <span className="text-3xl font-bold text-red-600 dark:text-green-600 group-hover:hidden">
+                    <span className="text-3xl font-bold text-red-600 dark:text-red-400 group-hover:hidden">
                       {product.price * ((100 - product.discountAmount) / 100)} TL
                     </span>
                   </>
@@ -107,4 +106,4 @@ function ManHome() {
   );
 }
 
-export default ManHome;
+export default WomanHome;
