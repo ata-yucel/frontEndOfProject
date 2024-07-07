@@ -11,6 +11,7 @@ import LayoutWithoutNavbar from "./layouts/LayoutWithoutNavbar"
 import Profile from "./pages/Profile"
 import WomanHome from "./pages/WomanHome"
 import Home from "./pages/Home"
+import ChangePassword from "./pages/ChangePassword"
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />
+      },
+      {
+        path: "/changePassword",
+        element: <ChangePassword />
       },
 
       {
