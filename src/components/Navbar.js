@@ -11,7 +11,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import { Badge } from '@mui/material';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { useDispatch, useSelector } from 'react-redux';
@@ -23,22 +22,24 @@ const settings = ['Profile', 'Logout'];
 
 function Navbar() {
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-
-  const { cartNumber } = useSelector(state => state.cart)
-  const { user, username } = useSelector(state => state.user)
-
+  const { cartNumber } = useSelector(state => state.cart);
+  const { user, username } = useSelector(state => state.user);
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElCategory, setAnchorElCategory] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
+  };
+  const handleOpenCategoryMenu = (event) => {
+    setAnchorElCategory(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
@@ -49,10 +50,19 @@ function Navbar() {
     setAnchorElUser(null);
   };
 
-  const setLogout = () => {
-    dispatch(handleLogout())
-    handleCloseUserMenu()
+  const handleCloseCategoryMenu = () => {
+    setAnchorElCategory(null);
+  };
+
+  const handleNavigate = (page) => {
+    navigate(`/${page.toLowerCase()}`);
+    handleCloseNavMenu();
   }
+
+  const setLogout = () => {
+    dispatch(handleLogout());
+    handleCloseUserMenu();
+  };
 
   return (
     <AppBar position="static" sx={{ backgroundColor: "rgba(250,235,215, 0.8)", marginBottom: "15px" }}>
@@ -106,18 +116,17 @@ function Navbar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page} onClick={page === 'Category' ? handleOpenCategoryMenu : () => handleNavigate(page)}>
                   <Typography color={"darkblue"} textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
           <Typography
             variant="h5"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href="#"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -135,7 +144,7 @@ function Navbar() {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={page === 'Category' ? handleOpenCategoryMenu : () => handleNavigate(page)}
                 sx={{ my: 2, color: 'black', display: 'block' }}
               >
                 {page}
@@ -180,6 +189,31 @@ function Navbar() {
               </MenuItem>
               <MenuItem onClick={setLogout}>
                 <Typography textAlign="center">Logout</Typography>
+              </MenuItem>
+            </Menu>
+
+            {/* Category Menu */}
+            <Menu
+              sx={{ mt: '45px' }}
+              id="category-menu"
+              anchorEl={anchorElCategory}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElCategory)}
+              onClose={handleCloseCategoryMenu}
+            >
+              <MenuItem onClick={() => { navigate("/manhome"); handleCloseCategoryMenu(); }}>
+                <Typography textAlign="center">Man</Typography>
+              </MenuItem>
+              <MenuItem onClick={() => { navigate("/womanhome"); handleCloseCategoryMenu(); }}>
+                <Typography textAlign="center">Woman</Typography>
               </MenuItem>
             </Menu>
           </Box>

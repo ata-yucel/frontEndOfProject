@@ -12,6 +12,9 @@ import Profile from "./pages/Profile"
 import WomanHome from "./pages/WomanHome"
 import Home from "./pages/Home"
 import ChangePassword from "./pages/ChangePassword"
+import Contact from "./pages/Contact"
+import About from "./pages/About"
+import Buy from "./pages/Buy"
 
 const router = createBrowserRouter([
   {
@@ -38,6 +41,14 @@ const router = createBrowserRouter([
         path: "/womanhome",
         element: <WomanHome />
       },
+      {
+        path: "/contact",
+        element: <Contact />,
+      }, 
+      {
+        path: "/about",
+        element: <About />,
+      },
     ]
   },
   {
@@ -56,7 +67,10 @@ const router = createBrowserRouter([
         path: "/changePassword",
         element: <ChangePassword />
       },
-
+      {
+        path: "/buy",
+        element: <Buy />
+      },
       {
         path: "*",
         element: <Error404 />
