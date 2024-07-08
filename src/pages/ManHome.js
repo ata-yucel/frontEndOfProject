@@ -21,7 +21,7 @@ function ManHome() {
       let response = await axios.get("http://localhost:3000/man/allManProducts");
       console.log(response.data);
       setData(response.data.data);
-      setFeatured(response.data.data.slice(0, 3)); // İlk üç ürünü öne çıkarılan fotoğraflar olarak ayarlayın
+      setFeatured(response.data.data.slice(0, 3)); 
     } catch (error) {
       console.log('Get All Products Error', error);
     }
