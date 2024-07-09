@@ -1,5 +1,3 @@
-
-
 import { createBrowserRouter } from "react-router-dom"
 import ManHome from "./pages/ManHome"
 import Login from "./pages/Login"
@@ -12,9 +10,10 @@ import Profile from "./pages/Profile"
 import WomanHome from "./pages/WomanHome"
 import Home from "./pages/Home"
 import ChangePassword from "./pages/ChangePassword"
-import Contact from "./pages/Contact"
+
 import About from "./pages/About"
 import Buy from "./pages/Buy"
+import Orders from "./pages/Orders"
 
 const router = createBrowserRouter([
   {
@@ -42,12 +41,12 @@ const router = createBrowserRouter([
         element: <WomanHome />
       },
       {
-        path: "/contact",
-        element: <Contact />,
-      }, 
-      {
         path: "/about",
         element: <About />,
+      },
+      {
+        path: "/orders",
+        element: <Orders />,
       },
     ]
   },

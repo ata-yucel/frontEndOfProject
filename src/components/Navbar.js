@@ -17,11 +17,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { handleLogout } from '../store/slices/userSlice';
 
-const pages = ['Category', 'About', 'Contact'];
-const settings = ['Profile', 'Logout'];
+const pages = ['Category', 'About', 'Orders'];
 
 function Navbar() {
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -35,9 +33,11 @@ function Navbar() {
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
+
   const handleOpenCategoryMenu = (event) => {
     setAnchorElCategory(event.currentTarget);
   };
@@ -62,6 +62,7 @@ function Navbar() {
   const setLogout = () => {
     dispatch(handleLogout());
     handleCloseUserMenu();
+    navigate('/login'); // Logout işlemi sonrası login sayfasına yönlendir
   };
 
   return (
@@ -75,14 +76,13 @@ function Navbar() {
               sx={{
                 mr: 2,
                 display: { xs: 'none', md: 'flex' },
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
+                fontFamily: 'monospace',  
+                fontWeight: 600,
                 color: 'black',
                 textDecoration: 'none',
               }}
             >
-              Shop
+              BAZISIBURADA
             </Typography>
           </Link>
 
@@ -132,13 +132,12 @@ function Navbar() {
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
               fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
+              fontWeight: 600,
               color: 'black',
               textDecoration: 'none',
             }}
           >
-            Shop
+            BAZISIBURADA
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
@@ -184,7 +183,7 @@ function Navbar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem>
+              <MenuItem onClick={() => { navigate("/profile"); handleCloseUserMenu(); }}>
                 <Typography textAlign="center">Profile</Typography>
               </MenuItem>
               <MenuItem onClick={setLogout}>

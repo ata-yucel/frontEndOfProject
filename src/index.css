@@ -30,5 +30,15 @@
 }
 
 .slide-out {
-  animation: slideOut 2s forwards;
+  animation: slideOut 1s forwards;
 }
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+#root {
+  min-height: 100%;
+}
+
