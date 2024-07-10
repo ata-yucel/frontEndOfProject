@@ -12,8 +12,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { Badge } from '@mui/material';
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import { useDispatch, useSelector } from 'react-redux';
+import StorefrontIcon from '@mui/icons-material/Storefront';import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { handleLogout } from '../store/slices/userSlice';
 
@@ -154,7 +153,7 @@ function Navbar() {
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <IconButton sx={{ mr: 2, border: "1px solid gray" }} onClick={() => navigate("/cart")}>
               <Badge badgeContent={cartNumber} color='error'>
-                <ShoppingCartOutlinedIcon />
+                <StorefrontIcon />
               </Badge>
             </IconButton>
             {

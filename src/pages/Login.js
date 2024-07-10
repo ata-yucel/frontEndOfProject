@@ -24,20 +24,22 @@ function Login() {
 
   const setLogin = async (login) => {
     try {
-      let response = await axios.post("http://localhost:3000/user/login", login);
-      if (response.data.status) {
-        toast.success(response.data.message);
-        localStorage.setItem("access_token", response.data.token);
-        dispatch(handleLogin(response.data.user));
-        navigate("/");
-      } else {
-        toast.error(response.data.message);
-      }
+        let response = await axios.post("http://localhost:3000/user/login", login);
+        if (response.data.status) {
+            console.log(response.data.user); // Backend'den gelen user objesini kontrol edin
+            toast.success(response.data.message);
+            localStorage.setItem("access_token", response.data.token);
+            dispatch(handleLogin(response.data.user));
+            navigate("/");
+        } else {
+            toast.error(response.data.message);
+        }
     } catch (error) {
-      toast.error("An error occurred. Please try again.");
-      console.log('Error:', error);
+        toast.error("An error occurred. Please try again.");
+        console.log('Error:', error);
     }
-  };
+};
+
 
   return (
     <div className='flex flex-col justify-center items-center h-screen w-screen' style={{ backgroundImage: `url(${bg})`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>

@@ -5,9 +5,12 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useDispatch } from 'react-redux';
 import { increment } from '../store/slices/cartSlice';
+import { useNavigate } from 'react-router-dom';
+
 
 function WomanHome() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [featured, setFeatured] = useState([]);
 
@@ -25,6 +28,10 @@ function WomanHome() {
       console.log('Get All Products Error', error);
     }
   };
+  const handleProductClick = (productId, gender) => {
+    navigate('/detail', { state: { productId, gender } });
+  };
+
 
   const settings = {
     dots: true,
@@ -61,6 +68,8 @@ function WomanHome() {
           <div className="relative w-full max-w-sm border-stone-400 border-4 bg-lime-200 rounded-lg dark:bg-stone-200 dark:border-stone-400 group"
             style={{ minHeight: "450px" }}
             key={key}
+            onClick={() => handleProductClick(product._id, 'woman')}
+
           >
             <a href="#">
               <img
@@ -82,7 +91,7 @@ function WomanHome() {
                     <span className="text-2xl font-bold text-stone-400 dark:text-stone-400 line-through mr-2 group-hover:hidden">
                       {product.price} TL
                     </span>
-                    <span className="text-3xl font-bold text-red-600 dark:text-red-400 group-hover:hidden">
+                    <span className="text-3xl font-bold text-green-600 dark:text-green-600 group-hover:hidden">
                       {product.price * ((100 - product.discountAmount) / 100)} TL
                     </span>
                   </>

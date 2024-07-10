@@ -14,7 +14,7 @@ import ChangePassword from "./pages/ChangePassword"
 import About from "./pages/About"
 import Buy from "./pages/Buy"
 import Orders from "./pages/Orders"
-import Detail from "./pages/Detail"
+import ProductDetail from "./pages/ProductDetail"
 
 const router = createBrowserRouter([
   {
@@ -51,7 +51,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/detail",
-        element: <Detail />,
+        element: <ProductDetail />,
       },
     ]
   },

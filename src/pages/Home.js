@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import '../index.css'; // CSS dosyasını dahil edin
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { increment } from '../store/slices/cartSlice';
 
 function Home() {
-  const [manProducts, setManProducts] = useState([]);
-  const [womanProducts, setWomanProducts] = useState([]);
-  const [slideIn, setSlideIn] = useState(true);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [data, setData] = useState([]);
+  const [featured, setFeatured] = useState([]);
+  const [slideIn, setSlideIn] = useState(true);
 
   useEffect(() => {
     fetchProducts();
@@ -23,11 +23,15 @@ function Home() {
     try {
       const manResponse = await axios.get('http://localhost:3000/man/allManProducts');
       const womanResponse = await axios.get('http://localhost:3000/woman/allWomanProducts');
-      setManProducts(manResponse.data.data);
-      setWomanProducts(womanResponse.data.data);
+      setData(manResponse.data.data.concat(womanResponse.data.data));
+      setFeatured(manResponse.data.data.slice(0, 3).concat(womanResponse.data.data.slice(0, 3)));
     } catch (error) {
       console.error('Error fetching products:', error);
     }
+  };
+
+  const goToDetail = (product) => {
+    navigate('/detail', { state: { productId: product._id, gender: product.gender } });
   };
 
   return (
@@ -38,25 +42,23 @@ function Home() {
         </h1>
       </div>
       <div className='grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4'>
-        {manProducts.concat(womanProducts).map((product, index) => (
-          <div className="relative w-full max-w-sm border-stone-400 border-4 bg-lime-200 rounded-lg dark:bg-stone-200 dark:border-stone-400 group"
-            style={{ minHeight: "450px" }}
+        {data && data.map((product, index) => (
+          <div
             key={index}
+            className="relative w-full max-w-sm border-stone-400 border-4 bg-lime-200 rounded-lg dark:bg-stone-200 dark:border-stone-400 group"
+            style={{ minHeight: "450px" }}
+            onClick={() => goToDetail(product)}
           >
-            <a href="#">
-              <img
-                className="p-8 rounded-t-lg w-full"
-                style={{ height: "350px", objectFit: "cover" }}
-                src={product.image}
-                alt="product image"
-              />
-            </a>
+            <img
+              className="p-8 rounded-t-lg w-full"
+              style={{ height: "350px", objectFit: "cover" }}
+              src={product.image}
+              alt="product image"
+            />
             <div className="px-5 pb-5">
-              <a href="#">
-                <h5 className="text-xl font-semibold tracking-tight text-stone-400 dark:text-stone-400">
-                  {product.nameOfProduct}
-                </h5>
-              </a>
+              <h5 className="text-xl font-semibold tracking-tight text-stone-400 dark:text-stone-400">
+                {product.nameOfProduct}
+              </h5>
               <div className="flex items-center justify-between">
                 {product.discountAmount > 0 ? (
                   <>
@@ -73,7 +75,10 @@ function Home() {
                   </span>
                 )}
                 <button
-                  onClick={() => dispatch(increment(product))}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    dispatch(increment(product));
+                  }}
                   className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:white group-hover:block hidden"
                 >
                   Add to Basket
