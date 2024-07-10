@@ -22,9 +22,9 @@ function LayoutWithNavbar() {
         let tokenExpireTime = decoded.exp;
 
         if (tokenExpireTime > currentTime) {
-          const { username, email } = decoded;
-          if (username && email) {
-            dispatch(handleLogin({ username, email }));
+          const { username, email, balance } = decoded;
+          if (username && email && balance) {
+            dispatch(handleLogin({ username, email, balance }));
           } else {
             console.error("Decoded token does not contain necessary user information.");
           }

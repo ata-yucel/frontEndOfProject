@@ -11,17 +11,17 @@ export const userSlice = createSlice({
   },
   reducers: {
     handleLogin: (state, action) => {
-      console.log(action.payload); // action.payload içeriğini kontrol edin
+      console.log(action.payload);
       state.email = action.payload.email;
       state.username = action.payload.username;
-      state.balance = action.payload.balance; // Balance eklendi
+      state.balance = action.payload.balance; 
       state.user = true;
       state.message = action.payload.message;
     },
     handleLogout: (state) => {
       state.email = "";
       state.username = "";
-      state.balance = 0; // Balance sıfırlandı
+      state.balance = 0; 
       state.user = false;
       localStorage.removeItem("access_token");
       state.message = "";
