@@ -151,7 +151,7 @@ function Navbar() {
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <IconButton sx={{ mr: 2, border: "1px solid gray" }} onClick={() => navigate("/cart")}>
               <Badge badgeContent={cartNumber} color='error'>
                 <ShoppingCartOutlinedIcon />
@@ -191,7 +191,6 @@ function Navbar() {
               </MenuItem>
             </Menu>
 
-            {/* Category Menu */}
             <Menu
               sx={{ mt: '45px' }}
               id="category-menu"
@@ -218,7 +217,8 @@ function Navbar() {
           </Box>
         </Toolbar>
       </Container>
-    </AppBar >
+    </AppBar>
   );
 }
+
 export default Navbar;

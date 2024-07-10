@@ -5,7 +5,6 @@ import { Button, TextField, Typography, Paper } from '@mui/material';
 import PaymentIcon from '@mui/icons-material/Payment';
 import axios from 'axios';
 import { clearCart } from '../store/slices/cartSlice';
-import '../index.css';
 import { toast } from 'react-toastify';
 
 function Buy() {
@@ -20,17 +19,17 @@ function Buy() {
       const orderData = {
         username,
         products: products.map(product => ({
-          _id: product._id,
+          productId: product._id,
           nameOfProduct: product.nameOfProduct,
           image: product.image,
-          cartQuantity: product.cartQuantity,
+          quantity: product.cartQuantity,
           price: product.price
         })),
         totalPrice: products.reduce((total, product) => total + product.cartQuantity * product.price, 0),
         address
       };
-      
-      console.log('Order Data:', orderData); // Hata ayıklamak için
+
+      console.log('Order Data:', orderData);
 
       const response = await axios.post('http://localhost:3000/order/create', orderData, {
         headers: {
@@ -45,8 +44,12 @@ function Buy() {
       }
     } catch (error) {
       console.error('Error creating order:', error);
-      console.error('Error response data:', error.response.data);
-      toast.error('Failed to create order.');
+      if (error.response && error.response.data) {
+        console.error('Error response data:', error.response.data);
+        toast.error(error.response.data.message || 'Failed to create order.');
+      } else {
+        toast.error('Failed to create order.');
+      }
     }
   };
 

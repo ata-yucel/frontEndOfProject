@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import { Outlet } from 'react-router-dom';
-import {jwtDecode} from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode'; // Default import
 import { handleLogin } from '../store/slices/userSlice';
 import { useDispatch } from 'react-redux';
 
@@ -22,7 +22,6 @@ function LayoutWithNavbar() {
         let tokenExpireTime = decoded.exp;
 
         if (tokenExpireTime > currentTime) {
-          // decoded nesnesinde username ve email var mı kontrol edelim
           const { username, email } = decoded;
           if (username && email) {
             dispatch(handleLogin({ username, email }));

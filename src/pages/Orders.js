@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Typography, Paper, Divider } from '@mui/material';
 import { useSelector } from 'react-redux';
-import '../index.css';
 
 function Orders() {
   const [orders, setOrders] = useState([]);
@@ -34,7 +33,7 @@ function Orders() {
   }, [username]);
 
   return (
-    <div className='flex flex-col items-center h-screen w-screen' style={{ backgroundImage: 'linear-gradient(to right, #FFD700, #32CD32)' }}>
+    <div style={{ minHeight: '100vh', width: '100vw', background: 'linear-gradient(to right, #FFD700, #32CD32)', display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop:'-17px'}}>
       <Paper className='p-6 m-4 w-3/4' style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)' }}>
         <Typography variant="h4" gutterBottom>
           My Orders
@@ -57,7 +56,7 @@ function Orders() {
                   <div key={idx} className="flex justify-between items-center my-2 p-2 border-b-2 border-gray-200">
                     <div className="flex items-center">
                       <img
-                        src={product.image} // Ürünün fotoğrafı
+                        src={product.image} 
                         alt="product"
                         className="w-16 h-16 object-cover rounded-lg"
                       />

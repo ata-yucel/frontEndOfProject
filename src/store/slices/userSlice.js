@@ -1,3 +1,4 @@
+
 import { createSlice } from "@reduxjs/toolkit";
 
 export const userSlice = createSlice({
@@ -18,7 +19,7 @@ export const userSlice = createSlice({
       state.username = "";
       state.user = false;
       localStorage.removeItem("access_token");
-    }
+    },
   }
 });
 
