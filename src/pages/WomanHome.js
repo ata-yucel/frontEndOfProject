@@ -7,7 +7,6 @@ import { useDispatch } from 'react-redux';
 import { increment } from '../store/slices/cartSlice';
 import { useNavigate } from 'react-router-dom';
 
-
 function WomanHome() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -28,10 +27,10 @@ function WomanHome() {
       console.log('Get All Products Error', error);
     }
   };
+
   const handleProductClick = (productId, gender) => {
     navigate('/detail', { state: { productId, gender } });
   };
-
 
   const settings = {
     dots: true,
@@ -69,7 +68,6 @@ function WomanHome() {
             style={{ minHeight: "450px" }}
             key={key}
             onClick={() => handleProductClick(product._id, 'woman')}
-
           >
             <a href="#">
               <img
@@ -101,7 +99,10 @@ function WomanHome() {
                   </span>
                 )}
                 <button
-                  onClick={() => dispatch(increment(product))}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    dispatch(increment(product));
+                  }}
                   className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:white group-hover:block hidden"
                 >
                   Add to Basket
