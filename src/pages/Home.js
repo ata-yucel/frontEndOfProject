@@ -15,7 +15,7 @@ function Home() {
     fetchProducts();
     const interval = setInterval(() => {
       setSlideIn(prev => !prev);
-    }, 4000); // 4 saniye bekletmek için
+    }, 3000); 
     return () => clearInterval(interval);
   }, []);
 

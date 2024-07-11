@@ -26,7 +26,7 @@ function Login() {
     try {
         let response = await axios.post("http://localhost:3000/user/login", login);
         if (response.data.status) {
-            console.log(response.data.user); // Backend'den gelen user objesini kontrol edin
+            console.log(response.data.user); 
             toast.success(response.data.message);
             localStorage.setItem("access_token", response.data.token);
             dispatch(handleLogin(response.data.user));

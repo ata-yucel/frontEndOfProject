@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 
 function ProductDetail() {
   const location = useLocation();
-  const { productId, gender } = location.state || {}; // state'den productId ve gender'i alın
+  const { productId, gender } = location.state || {}; 
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -20,10 +20,10 @@ function ProductDetail() {
         console.log(gender);
     
         const response = await axios.post(`http://localhost:3000/${gender.charAt(0).toLowerCase() + gender.slice(1)}/find${gender.charAt(0).toUpperCase() + gender.slice(1)}Product`, {
-          id: productId // id'yi body'de gönderin
+          id: productId 
         }, {
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('access_token')}` // Authorization token'ını ekleyin
+            'Authorization': `Bearer ${localStorage.getItem('access_token')}` 
           }
         });
         setProduct(response.data.data);

@@ -61,7 +61,7 @@ function Navbar() {
   const setLogout = () => {
     dispatch(handleLogout());
     handleCloseUserMenu();
-    navigate('/login'); // Logout işlemi sonrası login sayfasına yönlendir
+    navigate('/login'); 
   };
 
   return (

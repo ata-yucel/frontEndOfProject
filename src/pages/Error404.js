@@ -9,10 +9,9 @@ function Error404() {
   return (
     <div className='flex justify-center text-center'>
       <div>
-        <p className='text-red-400 text-5xl'>404</p>
         <p className='text-red-800 text-2xl'>Page Not Found</p>
         <div className='mt-10'>
-          <Link to={"/"} className=' bg-blue-600 text-white hover:bg-blue-400 rounded-full p-4' >Go to Home</Link>
+          <Link to={"/"} className=' bg-green-600 text-white hover:bg-slate-600 rounded-full p-4' >Go to Home Page</Link>
         </div>
       </div>
 

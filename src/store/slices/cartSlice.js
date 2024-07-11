@@ -18,7 +18,7 @@ export const counterSlice = createSlice({
       state.cartNumber += 1
       let product = state.products.find(item => item._id === action.payload._id)
       if (product) {
-        //Aynı ürüne ikinci defa tıklanmış
+        
         let newProducts = state.products.map((item) => {
           if(action.payload._id === item._id) {
             return {...item, cartQuantity : item.cartQuantity + 1}
@@ -27,12 +27,12 @@ export const counterSlice = createSlice({
         })
         state.products = newProducts
       } else {
-        //Ürüne ilk defa tıklanmış
+        
         state.products.push(action.payload)
       }
     },
     clearCart: (state) => {
-      //state = initialState
+      
       state.products = []
       state.cartNumber = 0
     },

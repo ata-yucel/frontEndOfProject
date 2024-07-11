@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import { Outlet } from 'react-router-dom';
-import {jwtDecode} from 'jwt-decode'; // Default import
+import {jwtDecode} from 'jwt-decode'; 
 import { handleLogin } from '../store/slices/userSlice';
 import { useDispatch } from 'react-redux';
 
